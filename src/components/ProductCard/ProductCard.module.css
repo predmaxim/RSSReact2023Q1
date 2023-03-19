@@ -1,0 +1,16 @@
+.card {
+  max-width: 220px;
+}
+
+.img {
+  width: auto;
+  height: 120px;
+}
+
+.header {
+  font-size: 16px;
+}
+
+.description {
+  font-size: 14px;
+}
