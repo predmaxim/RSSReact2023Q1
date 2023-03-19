@@ -14,6 +14,10 @@ export class ProductCard extends React.Component<Product> {
         />
         <h3 className={style.title}>{this.props.title}</h3>
         <p className={style.description}>{this.props.description}</p>
+        <div className={style.cardFooter}>
+          <p className={style.price}>{`$${this.props.price}`}</p>
+          <button>Add to Cart</button>
+        </div>
       </div>
     );
   }

@@ -7,10 +7,23 @@
   height: 120px;
 }
 
-.header {
-  font-size: 16px;
+.title {
+  font-size: 18px;
+  margin-bottom: 0;
 }
 
 .description {
   font-size: 14px;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }
