@@ -5,7 +5,7 @@ import style from './ProductCard.module.css';
 export class ProductCard extends React.Component<Product> {
   render() {
     return (
-      <div className={style.card}>
+      <div className={style.card} id={`${this.props.id}`}>
         <img
           className={style.img}
           src={this.props.images[0]}
