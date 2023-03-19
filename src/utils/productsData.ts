@@ -9,7 +9,7 @@ export interface Product {
   brand: string;
   category: string;
   thumbnail: string;
-  images: [];
+  images: string[];
 }
 
 export const productsData: Product[] = await fetch('https://dummyjson.com/products')
