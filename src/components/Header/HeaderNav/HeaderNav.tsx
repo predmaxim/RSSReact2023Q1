@@ -13,6 +13,11 @@ export class HeaderNav extends React.Component {
             </NavLink>
           </li>
           <li>
+            <NavLink to="/about" className={({ isActive }) => (isActive ? style.active : '')}>
+              About
+            </NavLink>
+          </li>
+          <li>
             <NavLink to="/404" className={({ isActive }) => (isActive ? style.active : '')}>
               404
             </NavLink>
