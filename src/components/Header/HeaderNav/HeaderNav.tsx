@@ -17,6 +17,11 @@ export class HeaderNav extends React.Component {
               About
             </NavLink>
           </li>
+          <li>
+            <NavLink to="/form" className={({ isActive }) => (isActive ? style.active : '')}>
+              Form
+            </NavLink>
+          </li>
         </ul>
       </nav>
     );
