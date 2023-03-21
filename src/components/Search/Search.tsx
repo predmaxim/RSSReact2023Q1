@@ -17,6 +17,9 @@ export class Search extends React.Component {
           name="headerSearch"
           id="headerSearch"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => (this.val = e.target.value)}
+          defaultValue={
+            localStorage.getItem('searchVal') ? (localStorage.getItem('searchVal') as string) : ''
+          }
         />
         <button
           type="submit"
