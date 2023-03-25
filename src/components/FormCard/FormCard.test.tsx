@@ -8,7 +8,7 @@ const testProps: FormCardProps = {
   avatar: 'https://i.dummyjson.com/data/products/1/1.jpg',
   name: 'Max',
   surname: 'Pred',
-  borthdate: '1985-06-05',
+  birthday: '1985-06-05',
   city: 'St.Petersburg',
   sex: 'Male',
 };
@@ -27,7 +27,7 @@ describe('ProductCard test', () => {
   });
 
   test('Should show price', () => {
-    expect(screen.getByText(testProps.borthdate)).toBeDefined();
+    expect(screen.getByText(testProps.birthday)).toBeDefined();
   });
 
   test('Should show price', () => {
