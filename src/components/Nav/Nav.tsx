@@ -1,8 +1,8 @@
 import React from 'react';
-import style from './HeaderNav.module.css';
+import style from './Nav.module.css';
 import { NavLink } from 'react-router-dom';
 
-export class HeaderNav extends React.Component {
+export class Nav extends React.Component {
   render() {
     return (
       <nav className={style.nav}>

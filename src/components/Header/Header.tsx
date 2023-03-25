@@ -1,6 +1,6 @@
 import React from 'react';
 import { Search } from '../';
-import { HeaderNav } from './HeaderNav/HeaderNav';
+import { Nav } from '../Nav/Nav';
 import style from './Header.module.css';
 
 export class Header extends React.Component {
@@ -8,7 +8,7 @@ export class Header extends React.Component {
     return (
       <header>
         <div className={`${style.header} container`}>
-          <HeaderNav />
+          <Nav />
           <Search />
         </div>
       </header>
