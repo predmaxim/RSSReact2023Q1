@@ -2,3 +2,12 @@
   display: flex;
   flex-direction: column;
 }
+
+.formCardsSection {
+  display: flex;
+  margin: 0 auto;
+  width: fit-content;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
