@@ -32,3 +32,17 @@ select {
   margin: 0 auto;
   padding: 0 30px;
 }
+
+.error {
+  border-color: red;
+  color: red;
+}
+
+.hide {
+  display: none;
+}
+
+.errorMessage {
+  font-size: 12px;
+  margin: 0;
+}
