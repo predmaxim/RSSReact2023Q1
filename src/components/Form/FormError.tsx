@@ -8,10 +8,6 @@ export interface FormErrorProps {
 
 export class FormError extends React.Component<FormErrorProps> {
   render() {
-    return (
-      <p className={this.props.isValid ? 'hide' : 'error errorMessage'}>
-        {this.props.text}
-      </p>
-    );
+    return <p className={this.props.isValid ? 'hide' : 'error errorMessage'}>{this.props.text}</p>;
   }
 }

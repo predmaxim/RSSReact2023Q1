@@ -12,7 +12,7 @@ span {
   margin: 15px 5px 0;
 }
 
-input:not([type="file"], [type="checkbox"], [type="radio"]),
+input:not([type='file'], [type='checkbox'], [type='radio']),
 select {
   height: 30px;
   border-radius: 5px;
