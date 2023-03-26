@@ -4,13 +4,7 @@ import { render, screen } from '@testing-library/react';
 import { Message, MessageProps } from './Message';
 
 const testProps: MessageProps = {
-  id: 1,
-  avatar: 'https://i.dummyjson.com/data/products/1/1.jpg',
-  name: 'Max',
-  surname: 'Pred',
-  birthday: '1985-06-05',
-  city: 'St.Petersburg',
-  sex: 'Male',
+  text: 'test',
 };
 
 describe('ProductCard test', () => {
@@ -19,22 +13,6 @@ describe('ProductCard test', () => {
   });
 
   test('Should show title', () => {
-    expect(screen.getByText(testProps.name)).toBeDefined();
-  });
-
-  test('Should show description', () => {
-    expect(screen.getByText(testProps.surname)).toBeDefined();
-  });
-
-  test('Should show price', () => {
-    expect(screen.getByText(testProps.birthday)).toBeDefined();
-  });
-
-  test('Should show price', () => {
-    expect(screen.getByText(testProps.city)).toBeDefined();
-  });
-
-  test('Should show price', () => {
-    expect(screen.getByText(testProps.sex)).toBeDefined();
+    expect(screen.getByText('test')).toBeDefined();
   });
 });

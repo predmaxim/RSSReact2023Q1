@@ -3,9 +3,13 @@ import { beforeEach, describe, expect, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Form } from './Form';
 
-describe('ProductCard test', () => {
+const updateFormPageState = (form: JSX.Element): void => {
+  console.log(form.props);
+};
+
+describe('Form test', () => {
   beforeEach(() => {
-    render(<Form />);
+    render(<Form updateFormPageState={updateFormPageState} />);
   });
 
   test('Should show button', () => {
@@ -13,6 +17,14 @@ describe('ProductCard test', () => {
   });
 
   test('Should show input', () => {
-    expect(screen.getByRole('textbox')).toBeDefined();
+    expect(screen.getByPlaceholderText(/first name/i)).toBeDefined();
+  });
+
+  test('Should show input', () => {
+    expect(screen.getByPlaceholderText(/last name/i)).toBeDefined();
+  });
+
+  test('Should show input', () => {
+    expect(screen.getByText(/birthday/i)).toBeDefined();
   });
 });

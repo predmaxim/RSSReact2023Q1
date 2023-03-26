@@ -6,35 +6,35 @@ import { FormCard, FormCardProps } from './FormCard';
 const testProps: FormCardProps = {
   id: 1,
   avatar: 'https://i.dummyjson.com/data/products/1/1.jpg',
-  name: 'Max',
-  surname: 'Pred',
+  firstname: 'Max',
+  lastname: 'Pred',
   birthday: '1985-06-05',
   city: 'St.Petersburg',
-  sex: 'Male',
+  gender: 'Male',
 };
 
-describe('ProductCard test', () => {
+describe('FormCard test', () => {
   beforeEach(() => {
     render(<FormCard {...testProps} />);
   });
 
-  test('Should show title', () => {
-    expect(screen.getByText(testProps.name)).toBeDefined();
+  test('Should be show firstname', () => {
+    expect(screen.getByText(/Max/)).toBeDefined();
   });
 
-  test('Should show description', () => {
-    expect(screen.getByText(testProps.surname)).toBeDefined();
+  test('Should be show lastname', () => {
+    expect(screen.getByText(/Pred/)).toBeDefined();
   });
 
-  test('Should show price', () => {
-    expect(screen.getByText(testProps.birthday)).toBeDefined();
+  test('Should be show birthday', () => {
+    expect(screen.getByText(/1985-06-05/i)).toBeDefined();
   });
 
-  test('Should show price', () => {
-    expect(screen.getByText(testProps.city)).toBeDefined();
+  test('Should be show city', () => {
+    expect(screen.getByText(/St.Petersburg/i)).toBeDefined();
   });
 
-  test('Should show price', () => {
-    expect(screen.getByText(testProps.sex)).toBeDefined();
+  test('Should be show gender', () => {
+    expect(screen.getByText(/Male/i)).toBeDefined();
   });
 });
