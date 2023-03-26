@@ -14,14 +14,13 @@ export interface FormPageStateProps {
 export class FormPage extends React.Component<FormPageProps, FormPageStateProps> {
   constructor(props: FormPageProps) {
     super(props);
-    this.updateFormPageState = this.updateFormPageState.bind(this);
     this.state = {
       formCardsArr: [],
       messageText: '',
     };
   }
 
-  updateFormPageState(form: JSX.Element): void {
+  updateFormPageState = (form: JSX.Element): void => {
     this.setState({
       formCardsArr: this.state.formCardsArr.concat(form),
       messageText: 'Form has been saved!',
@@ -29,7 +28,7 @@ export class FormPage extends React.Component<FormPageProps, FormPageStateProps>
     setTimeout(() => {
       this.setState({ messageText: '' });
     }, 3000);
-  }
+  };
 
   render() {
     return (
