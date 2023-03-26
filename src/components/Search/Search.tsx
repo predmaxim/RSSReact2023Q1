@@ -1,13 +1,36 @@
 import React from 'react';
 import style from './Search.module.css';
 
-export class Search extends React.Component {
-  val = '';
+export interface SearchProps {
+  [key: string]: string;
+}
 
-  submit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
-    e.preventDefault();
-    localStorage.setItem('searchVal', this.val);
+export interface FormPageStateProps {
+  searchQuery: string;
+}
+
+export class Search extends React.Component<SearchProps, FormPageStateProps> {
+  constructor(props: SearchProps) {
+    super(props);
+    this.state = {
+      searchQuery: localStorage.getItem('searchQuery')
+        ? (localStorage.getItem('searchQuery') as string)
+        : '',
+    };
   }
+
+  onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    this.setState({ searchQuery: e.target.value });
+  };
+
+  submit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+    e.preventDefault();
+    localStorage.setItem('searchQuery', this.state.searchQuery);
+  };
+
+  componentWillUnmount = (): void => {
+    localStorage.setItem('searchQuery', this.state.searchQuery);
+  };
 
   render() {
     return (
@@ -16,16 +39,10 @@ export class Search extends React.Component {
           type="text"
           name="headerSearch"
           id="headerSearch"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => (this.val = e.target.value)}
-          defaultValue={
-            localStorage.getItem('searchVal') ? (localStorage.getItem('searchVal') as string) : ''
-          }
+          onChange={this.onChangeHandler}
+          value={this.state.searchQuery}
         />
-        <button
-          type="submit"
-          id="headerSearchSubmit"
-          onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => this.submit(e)}
-        >
+        <button type="submit" onClick={this.submit}>
           Search
         </button>
       </form>
