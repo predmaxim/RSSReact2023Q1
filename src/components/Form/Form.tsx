@@ -73,7 +73,7 @@ export class Form extends React.Component<FormProps, FormStateProps> {
   onClickHandle = () => {
     this.setState({
       validateResult: {
-        avatar: validateFirstLetter((this.avatarRef.current as HTMLInputElement).value),
+        avatar: validateEmpty((this.avatarRef.current as HTMLInputElement).value),
         firstname: validateFirstLetter((this.firstnameRef.current as HTMLInputElement).value),
         lastname: validateFirstLetter((this.lastnameRef.current as HTMLInputElement).value),
         birthday: validateEmpty((this.birthdayRef.current as HTMLInputElement).value),
