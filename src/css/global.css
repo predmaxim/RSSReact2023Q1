@@ -1,0 +1,48 @@
+h1,
+h2 {
+  text-align: center;
+  margin: 0 0 30px;
+}
+
+main {
+  padding: 40px 30px;
+}
+
+span {
+  margin: 15px 5px 0;
+}
+
+input:not([type='file'], [type='checkbox'], [type='radio']),
+select {
+  height: 30px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #ccc;
+  background: #fff;
+  padding: 0 0 0 10px;
+}
+
+select {
+  height: 32px;
+  padding: 0 10px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.error {
+  border-color: red;
+  color: red;
+}
+
+.hide {
+  display: none;
+}
+
+.errorMessage {
+  font-size: 12px;
+  margin: 0;
+}
