@@ -95,7 +95,14 @@ export class Form extends React.Component<FormProps, FormStateProps> {
           <div className={style.row}>
             <label htmlFor="avatar">
               <span>Your avatar:* </span>
-              <input type="file" id="avatar" name="avatar" ref={this.avatarRef} required />
+              <input
+                type="file"
+                id="avatar"
+                name="avatar"
+                accept="image/jpeg,image/png,image/gif"
+                ref={this.avatarRef}
+                required
+              />
               <FormError
                 isValid={this.state.validateResult.avatar}
                 text="The field must not be empty"
