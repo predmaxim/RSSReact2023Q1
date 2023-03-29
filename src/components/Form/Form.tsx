@@ -10,6 +10,7 @@ export interface FormProps {
 
 export function Form({ updateFormPageState }: FormProps) {
   let count = 0;
+  const formRef = useRef<HTMLFormElement>(null);
   const avatarRef = useRef<HTMLInputElement>(null);
   const firstnameRef = useRef<HTMLInputElement>(null);
   const lastnameRef = useRef<HTMLInputElement>(null);
@@ -29,16 +30,7 @@ export function Form({ updateFormPageState }: FormProps) {
 
   const validateResult = [avatar, firstname, lastname, birthday, city, gender, agreement];
 
-  const clearForm = (): void => {
-    (avatarRef.current as HTMLInputElement).value = '';
-    (firstnameRef.current as HTMLInputElement).value = '';
-    (lastnameRef.current as HTMLInputElement).value = '';
-    (birthdayRef.current as HTMLInputElement).value = '';
-    (cityRef.current as HTMLSelectElement).value = '';
-    (maleRef.current as HTMLInputElement).checked = false;
-    (femaleRef.current as HTMLInputElement).checked = false;
-    (agreementRef.current as HTMLInputElement).checked = false;
-  };
+  const clearForm = (): void => formRef.current?.reset();
 
   const onSubmitHandle = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -79,7 +71,7 @@ export function Form({ updateFormPageState }: FormProps) {
   return (
     <>
       <h2>Enter your data</h2>
-      <form className={style.form} onSubmit={onSubmitHandle}>
+      <form className={style.form} onSubmit={onSubmitHandle} ref={formRef}>
         <div className={style.row}>
           <label htmlFor="avatar">
             <span>Your avatar:* </span>
