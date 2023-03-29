@@ -1,49 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './formPage.module.css';
 import { Form, Message } from '../../components';
 
-export interface FormPageProps {
-  [key: string]: string;
-}
+export function FormPage() {
+  const [formCardsArr, setFormCardsArr] = useState<JSX.Element[]>([]);
+  const [messageText, setMessageText] = useState('');
 
-export interface FormPageStateProps {
-  formCardsArr: JSX.Element[];
-  messageText: string;
-}
-
-export class FormPage extends React.Component<FormPageProps, FormPageStateProps> {
-  constructor(props: FormPageProps) {
-    super(props);
-    this.state = {
-      formCardsArr: [],
-      messageText: '',
-    };
-  }
-
-  updateFormPageState = (form: JSX.Element): void => {
-    this.setState({
-      formCardsArr: this.state.formCardsArr.concat(form),
-      messageText: 'Form has been saved!',
-    });
+  const updateFormPageState = (form: JSX.Element): void => {
+    setMessageText('Form has been saved!');
+    setFormCardsArr(formCardsArr.concat(form));
     setTimeout(() => {
-      this.setState({ messageText: '' });
+      setMessageText('');
     }, 3000);
   };
 
-  render() {
-    return (
-      <main className="form">
-        <div className="container">
-          <h1>Form Page</h1>
-          <section className={style.formSection}>
-            <Form updateFormPageState={this.updateFormPageState} />
-            <Message text={this.state.messageText} />
-          </section>
-          <section className={style.formCardsSection}>
-            {this.state.formCardsArr.map((formCard: JSX.Element) => formCard)}
-          </section>
-        </div>
-      </main>
-    );
-  }
+  return (
+    <main className="form">
+      <div className="container">
+        <h1>Form Page</h1>
+        <section className={style.formSection}>
+          <Form updateFormPageState={updateFormPageState} />
+          <Message text={messageText} />
+        </section>
+        <section className={style.formCardsSection}>
+          {formCardsArr.map((formCard: JSX.Element) => formCard)}
+        </section>
+      </div>
+    </main>
+  );
 }

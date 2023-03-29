@@ -11,18 +11,24 @@ export interface FormCardProps {
   gender: string;
 }
 
-export class FormCard extends React.Component<FormCardProps> {
-  render() {
-    return (
-      <div className={style.card} id={`${this.props.id}`}>
-        <p>{this.props.avatar}</p>
-        <h3 className={style.name}>
-          {this.props.firstname} {this.props.lastname}
-        </h3>
-        <p className={style.birthday}>{this.props.birthday}</p>
-        <p className={style.city}>{this.props.city}</p>
-        <p className={style.gender}>{this.props.gender}</p>
-      </div>
-    );
-  }
+export function FormCard({
+  id,
+  avatar,
+  firstname,
+  lastname,
+  birthday,
+  city,
+  gender,
+}: FormCardProps) {
+  return (
+    <div className={style.card} id={`${id}`}>
+      <p>{avatar}</p>
+      <h3 className={style.name}>
+        {firstname} {lastname}
+      </h3>
+      <p className={style.birthday}>{birthday}</p>
+      <p className={style.city}>{city}</p>
+      <p className={style.gender}>{gender}</p>
+    </div>
+  );
 }
