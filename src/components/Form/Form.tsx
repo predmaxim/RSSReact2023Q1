@@ -30,27 +30,23 @@ export function Form({ updateFormPageState }: FormProps) {
 
   const validateResult = [avatar, firstname, lastname, birthday, city, gender, agreement];
 
-  const clearForm = (): void => formRef.current?.reset();
-
   const onSubmitHandle = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (validateResult.some((el: boolean) => el === false)) {
-      return;
+    if (validateResult.every((el: boolean): boolean => el === true)) {
+      count++;
+      const formCardProps = {
+        key: count,
+        id: count,
+        avatar: (avatarRef.current as HTMLInputElement).value,
+        firstname: (firstnameRef.current as HTMLInputElement).value,
+        lastname: (lastnameRef.current as HTMLInputElement).value,
+        birthday: (birthdayRef.current as HTMLInputElement).value,
+        city: (cityRef.current as HTMLSelectElement).value,
+        gender: maleRef.current?.checked ? 'male' : femaleRef.current?.checked ? 'female' : '',
+      };
+      updateFormPageState(<FormCard {...formCardProps} />);
+      formRef.current?.reset();
     }
-    count++;
-    updateFormPageState(
-      <FormCard
-        key={count}
-        id={count}
-        avatar={(avatarRef.current as HTMLInputElement).value}
-        firstname={(firstnameRef.current as HTMLInputElement).value}
-        lastname={(lastnameRef.current as HTMLInputElement).value}
-        birthday={(birthdayRef.current as HTMLInputElement).value}
-        city={(cityRef.current as HTMLSelectElement).value}
-        gender={maleRef.current?.checked ? 'male' : 'female'}
-      />
-    );
-    clearForm();
   };
 
   const onClickHandle = () => {
