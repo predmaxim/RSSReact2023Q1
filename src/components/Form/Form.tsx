@@ -10,7 +10,7 @@ export interface FormProps {
 }
 
 export function Form({ updateFormPageState }: FormProps) {
-  const [count, setCounte] = useState(0);
+  const [count, setCount] = useState(0);
   const [avatarFile, setAvatarFile] = useState('');
 
   const {
@@ -21,7 +21,7 @@ export function Form({ updateFormPageState }: FormProps) {
   } = useForm<FormCardProps>();
 
   const onSubmitHandle: SubmitHandler<FormCardProps> = (data: FormCardProps): void => {
-    setCounte(count + 1);
+    setCount(count + 1);
     updateFormPageState(
       <FormCard
         {...{
