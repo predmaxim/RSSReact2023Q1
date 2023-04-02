@@ -9,7 +9,7 @@ export interface FormCardProps {
   birthday: string;
   city: string;
   gender: string;
-  agreement: string;
+  agreement: boolean;
 }
 
 export function FormCard({
