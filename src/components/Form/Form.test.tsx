@@ -1,6 +1,6 @@
 import React from 'react';
 import { beforeEach, describe, expect, test } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { Form } from './Form';
 
 const updateFormPageState = (form: JSX.Element): void => {
