@@ -6,11 +6,12 @@ import { FormCard, FormCardProps } from './FormCard';
 const testProps: FormCardProps = {
   id: 1,
   avatar: 'https://i.dummyjson.com/data/products/1/1.jpg',
-  firstname: 'Max',
-  lastname: 'Pred',
+  firstName: 'Max',
+  lastName: 'Pred',
   birthday: '1985-06-05',
   city: 'St.Petersburg',
   gender: 'Male',
+  agreement: true,
 };
 
 describe('FormCard test', () => {
@@ -20,6 +21,11 @@ describe('FormCard test', () => {
 
   test('Should be show firstname', () => {
     expect(screen.getByText(/Max/)).toBeDefined();
+  });
+
+  test('firstName must be 3 letters length min', () => {
+    const firstName = screen.getByText(/Max/);
+    expect(firstName.textContent?.length).toBeGreaterThanOrEqual(3);
   });
 
   test('Should be show lastname', () => {

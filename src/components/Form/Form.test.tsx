@@ -16,15 +16,23 @@ describe('Form test', () => {
     expect(screen.getByRole('button')).toBeDefined();
   });
 
-  test('Should show input', () => {
+  test('Should show avatar input', () => {
+    expect(screen.getByText(/Your avatar/i)).toBeDefined();
+  });
+
+  test('Should show firstName input', () => {
     expect(screen.getByPlaceholderText(/first name/i)).toBeDefined();
   });
 
-  test('Should show input', () => {
+  test('Should show lastName input', () => {
     expect(screen.getByPlaceholderText(/last name/i)).toBeDefined();
   });
 
-  test('Should show input', () => {
+  test('Should show birthday input', () => {
     expect(screen.getByText(/birthday/i)).toBeDefined();
+  });
+
+  test('Should show agreenment checkbox', () => {
+    expect(screen.getByText(/I consent to my personal data/i)).toBeDefined();
   });
 });
