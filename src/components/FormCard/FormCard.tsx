@@ -4,18 +4,19 @@ import style from './FormCard.module.css';
 export interface FormCardProps {
   id: number;
   avatar: string;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   birthday: string;
   city: string;
   gender: string;
+  agreement: string;
 }
 
 export function FormCard({
   id,
   avatar,
-  firstname,
-  lastname,
+  firstName,
+  lastName,
   birthday,
   city,
   gender,
@@ -24,7 +25,7 @@ export function FormCard({
     <div className={style.card} id={`${id}`}>
       <p>{avatar}</p>
       <h3 className={style.name}>
-        {firstname} {lastname}
+        {firstName} {lastName}
       </h3>
       <p className={style.birthday}>{birthday}</p>
       <p className={style.city}>{city}</p>

@@ -1,167 +1,171 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import style from './Form.module.css';
 import { FormCard } from '../';
-import { FormError } from './FormError';
-import { validateFirstLetter, validateEmpty, validateChecked } from '../../utils';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { validateFirstLetter } from '../../utils';
+import { FormCardProps } from '../../components/FormCard/FormCard';
 
 export interface FormProps {
   updateFormPageState: (form: JSX.Element) => void;
 }
 
 export function Form({ updateFormPageState }: FormProps) {
-  let count = 0;
-  const formRef = useRef<HTMLFormElement>(null);
-  const avatarRef = useRef<HTMLInputElement>(null);
-  const firstnameRef = useRef<HTMLInputElement>(null);
-  const lastnameRef = useRef<HTMLInputElement>(null);
-  const birthdayRef = useRef<HTMLInputElement>(null);
-  const cityRef = useRef<HTMLSelectElement>(null);
-  const maleRef = useRef<HTMLInputElement>(null);
-  const femaleRef = useRef<HTMLInputElement>(null);
-  const agreementRef = useRef<HTMLInputElement>(null);
+  const [count, setCounte] = useState(0);
+  const [avatarFile, setAvatarFile] = useState('');
 
-  const [avatar, setAvatar] = useState(true);
-  const [firstname, setFirstname] = useState(true);
-  const [lastname, setLastname] = useState(true);
-  const [birthday, setBirthday] = useState(true);
-  const [city, setCity] = useState(true);
-  const [gender, setGender] = useState(true);
-  const [agreement, setAgreementr] = useState(true);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormCardProps>();
 
-  const validateResult = [avatar, firstname, lastname, birthday, city, gender, agreement];
-
-  const onSubmitHandle = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    if (validateResult.every((el: boolean): boolean => el === true)) {
-      count++;
-      const formCardProps = {
-        key: count,
-        id: count,
-        avatar: (avatarRef.current as HTMLInputElement).value,
-        firstname: (firstnameRef.current as HTMLInputElement).value,
-        lastname: (lastnameRef.current as HTMLInputElement).value,
-        birthday: (birthdayRef.current as HTMLInputElement).value,
-        city: (cityRef.current as HTMLSelectElement).value,
-        gender: maleRef.current?.checked ? 'male' : femaleRef.current?.checked ? 'female' : '',
-      };
-      updateFormPageState(<FormCard {...formCardProps} />);
-      formRef.current?.reset();
-    }
+  const onSubmitHandle: SubmitHandler<FormCardProps> = (data: FormCardProps): void => {
+    setCounte(count + 1);
+    updateFormPageState(
+      <FormCard
+        {...{
+          ...data,
+          key: count,
+          id: count,
+          avatar: avatarFile,
+          gender: data.gender,
+        }}
+      />
+    );
+    reset();
   };
 
-  const onClickHandle = () => {
-    setAvatar(validateEmpty((avatarRef.current as HTMLInputElement).value));
-    setFirstname(validateFirstLetter((firstnameRef.current as HTMLInputElement).value));
-    setLastname(validateFirstLetter((lastnameRef.current as HTMLInputElement).value));
-    setBirthday(validateEmpty((birthdayRef.current as HTMLInputElement).value));
-    setCity(validateEmpty((cityRef.current as HTMLSelectElement).value));
-    setAgreementr(validateChecked([(agreementRef.current as HTMLInputElement).checked]));
-    setGender(
-      validateChecked([
-        (maleRef.current as HTMLInputElement).checked,
-        (femaleRef.current as HTMLInputElement).checked,
-      ])
-    );
+  const avatarOnChangeHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAvatarFile(e.target?.files![0].name);
   };
 
   return (
     <>
       <h2>Enter your data</h2>
-      <form className={style.form} onSubmit={onSubmitHandle} ref={formRef}>
+      <form className={style.form} onSubmit={handleSubmit(onSubmitHandle)}>
         <div className={style.row}>
-          <label htmlFor="avatar">
+          <label>
             <span>Your avatar:* </span>
             <input
               type="file"
-              id="avatar"
-              name="avatar"
-              accept="image/jpeg,image/png,image/gif"
-              ref={avatarRef}
-              required
+              accept="image/*"
+              {...register('avatar', {
+                required: 'Choose an image',
+                onChange: avatarOnChangeHandle,
+              })}
             />
-            <FormError isValid={avatar} text="The field must not be empty" />
+            {errors?.avatar?.message && <p className="error">{errors?.avatar?.message}</p>}
           </label>
         </div>
 
         <div className={style.row}>
-          <label htmlFor="firstname">
+          <label>
             <span>First name:* </span>
             <input
               type="text"
-              id="firstname"
-              name="firstname"
               placeholder="First name"
-              ref={firstnameRef}
-              required
+              {...register('firstName', {
+                required: 'The field must not be empty',
+                minLength: {
+                  value: 3,
+                  message: 'Enter minimum 3 letters',
+                },
+                validate: (value: string): boolean | string =>
+                  validateFirstLetter(value) || 'First letter must be in Uppercase',
+              })}
             />
-            <FormError isValid={firstname} text="First letter must be in Uppercase" />
+            {errors?.firstName?.message && <p className="error">{errors?.firstName?.message}</p>}
           </label>
 
-          <label htmlFor="lastname">
+          <label>
             <span>Last name:* </span>
             <input
               type="text"
-              id="lastname"
-              name="lastname"
               placeholder="Last name"
-              ref={lastnameRef}
-              required
+              {...register('lastName', {
+                required: 'The field must not be empty',
+                minLength: {
+                  value: 3,
+                  message: 'Enter minimum 3 letters',
+                },
+                validate: (value: string): boolean | string =>
+                  validateFirstLetter(value) || 'First letter must be in Uppercase',
+              })}
             />
-            <FormError isValid={lastname} text="First letter must be in Uppercase" />
+            {errors?.lastName?.message && <p className="error">{errors?.lastName?.message}</p>}
           </label>
         </div>
 
         <div className={style.row}>
-          <label htmlFor="birthday">
+          <label>
             <span>Birthday:* </span>
-            <input type="date" id="birthday" name="birthday" ref={birthdayRef} required />
-            <FormError isValid={birthday} text="The field must not be empty" />
+            <input
+              type="date"
+              {...register('birthday', {
+                required: 'Select your birthday',
+              })}
+            />
+            {errors?.birthday?.message && <p className="error">{errors?.birthday?.message}</p>}
           </label>
 
-          <label htmlFor="city">
+          <label>
             <span>Your city</span>
-            <select name="city" id="city" ref={cityRef} required>
+            <select
+              {...register('city', {
+                required: 'Select your city',
+              })}
+            >
               <option defaultValue="" value="">
                 -- Select your city --
               </option>
-              <option defaultValue="Moscow" value="Moscow">
-                Moscow
-              </option>
-              <option defaultValue="Minsk" value="Minsk">
-                Minsk
-              </option>
-              <option defaultValue="Kiev" value="Kiev">
-                Kiev
-              </option>
+              <option value="Moscow">Moscow</option>
+              <option value="Minsk">Minsk</option>
+              <option value="Kiev">Kiev</option>
             </select>
-            <FormError isValid={city} text="The field must not be empty" />
+            {errors?.city?.message && <p className="error">{errors?.city?.message}</p>}
           </label>
         </div>
 
         <div className={style.row}>
           <div>
             Gender:*
-            <label htmlFor="male">
-              <input type="radio" id="male" name="gender" value="male" ref={maleRef} />
+            <label>
+              <input
+                type="radio"
+                value="male"
+                {...register('gender', {
+                  required: 'Select your gender',
+                })}
+              />
               <span>Male</span>
             </label>
-            <label htmlFor="female">
-              <input type="radio" id="female" name="gender" value="female" ref={femaleRef} />
+            <label>
+              <input
+                type="radio"
+                value="female"
+                {...register('gender', {
+                  required: 'Select your gender',
+                })}
+              />
               <span>Female</span>
             </label>
-            <FormError isValid={gender} text="The field must not be empty" />
+            {errors?.gender?.message && <p className="error">{errors?.gender?.message}</p>}
           </div>
         </div>
 
-        <label htmlFor="agreement">
+        <label>
           <span>I consent to my personal data*</span>
-          <input type="checkbox" id="agreement" required ref={agreementRef} />
-          <FormError isValid={agreement} text="The field must not be empty" />
+          <input
+            type="checkbox"
+            {...register('agreement', {
+              required: 'Accept the agreement!',
+            })}
+          />
+          {errors?.agreement?.message && <p className="error">{errors?.agreement?.message}</p>}
         </label>
 
-        <button className={style.button} onClick={onClickHandle}>
-          Submit
-        </button>
+        <button className={style.button}>Submit</button>
       </form>
     </>
   );

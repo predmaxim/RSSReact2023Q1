@@ -36,13 +36,10 @@ select {
 .error {
   border-color: red;
   color: red;
+  font-size: 12px;
+  margin: 0;
 }
 
 .hide {
   display: none;
-}
-
-.errorMessage {
-  font-size: 12px;
-  margin: 0;
 }
