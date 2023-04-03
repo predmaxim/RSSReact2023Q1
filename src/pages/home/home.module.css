@@ -4,3 +4,11 @@
   gap: 25px;
   justify-content: center;
 }
+
+.search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}

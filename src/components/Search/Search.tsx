@@ -11,19 +11,23 @@ export function Search() {
   };
 
   useEffect(() => {
-    localStorage.setItem('searchQuery', searchQuery);
+    searchQuery && localStorage.setItem('searchQuery', searchQuery);
+    return () => {
+      searchQuery && localStorage.setItem('searchQuery', searchQuery);
+    };
   }, [searchQuery]);
 
   return (
-    <form className={style.search}>
+    <div className={style.search}>
       <input
         type="text"
         name="headerSearch"
-        id="headerSearch"
         onChange={onChangeHandler}
-        value={searchQuery}
+        defaultValue={searchQuery}
       />
-      <button type="submit">Search</button>
-    </form>
+      <button type="submit" disabled={!searchQuery}>
+        Search
+      </button>
+    </div>
   );
 }
