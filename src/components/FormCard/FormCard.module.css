@@ -1,0 +1,32 @@
+.card {
+  max-width: 220px;
+  background: #f0f0f0;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.img {
+  width: auto;
+  height: 120px;
+}
+
+.title {
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+.description {
+  font-size: 14px;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
