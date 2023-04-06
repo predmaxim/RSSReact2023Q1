@@ -1,14 +1,10 @@
-.products {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 25px;
-  justify-content: center;
+.productsSection {
 }
 
-.search {
+.searchSection {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  gap: 30px;
   margin-bottom: 30px;
 }
