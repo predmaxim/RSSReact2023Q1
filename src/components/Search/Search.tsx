@@ -1,32 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef } from 'react';
 import style from './Search.module.css';
 
-export function Search() {
-  const [searchQuery, setSearchQuery] = useState(
-    localStorage.getItem('searchQuery') ? (localStorage.getItem('searchQuery') as string) : ''
-  );
+export interface SearchProps {
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
+}
 
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearchQuery(e.target.value);
+export function Search({ setQuery }: SearchProps) {
+  const searchRef = useRef<HTMLInputElement>(null);
+  const onKeyUpHandler = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+    e.key === 'Enter' && setQuery(e.currentTarget.value);
   };
 
-  useEffect(() => {
-    searchQuery && localStorage.setItem('searchQuery', searchQuery);
-    return () => {
-      searchQuery && localStorage.setItem('searchQuery', searchQuery);
-    };
-  }, [searchQuery]);
+  const onClickHandler = (): void => {
+    (searchRef.current as HTMLInputElement).value = '';
+    setQuery('');
+  };
 
   return (
-    <div className={style.search}>
+    <div className={style.searchContainer}>
       <input
         type="text"
-        name="headerSearch"
-        onChange={onChangeHandler}
-        defaultValue={searchQuery}
+        name="search"
+        onKeyUp={onKeyUpHandler}
+        placeholder="Search"
+        className={style.search}
+        ref={searchRef}
       />
-      <button type="submit" disabled={!searchQuery}>
-        Search
+      <button type="submit" className={style.clear} onClick={onClickHandler}>
+        x
       </button>
     </div>
   );
