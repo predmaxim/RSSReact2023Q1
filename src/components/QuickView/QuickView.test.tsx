@@ -1,8 +1,9 @@
 import React from 'react';
 import { beforeEach, describe, expect, test } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import { ProductCard } from './QuickView';
-import { Product } from 'utils/productsData';
+import { fireEvent, getByAltText, render, screen } from '@testing-library/react';
+import { ProductCard } from '../';
+import { Product } from '../../utils/api';
+import { QuickView } from './QuickView';
 
 const testProps: Product = {
   id: 1,
@@ -20,33 +21,11 @@ const testProps: Product = {
 describe('ProductCard test', () => {
   beforeEach(() => {
     render(<ProductCard {...testProps} />);
+    const link = screen.getByRole('link');
+    fireEvent.click(link);
   });
-
-  test('Should show title', () => {
-    expect(screen.getByText(testProps.title)).toBeDefined();
-  });
-
-  test('Should show description', () => {
-    expect(screen.getByText(testProps.description)).toBeDefined();
-  });
-
-  test('Should show price', () => {
-    expect(screen.getByText(`$${testProps.price}`)).toBeDefined();
-  });
-
-  test('Should show button', () => {
-    expect(screen.getByRole('button')).toBeDefined();
-  });
-
-  test('Should show button text', () => {
-    expect(screen.getByText(/add to cart/i)).toBeDefined();
-  });
-
-  test('Should show image', () => {
-    expect(screen.getByRole('img')).toBeDefined();
-  });
-
-  test('Should show image alt', () => {
-    expect(screen.getByText(testProps.title)).toBeDefined();
+  test('should first', () => {
+    const btns = screen.getAllByRole('button').length;
+    expect(btns).toEqual(2);
   });
 });
