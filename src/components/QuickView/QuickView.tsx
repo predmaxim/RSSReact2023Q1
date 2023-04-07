@@ -13,9 +13,6 @@ export function QuickView({
 }: QuickViewProps) {
   const closePopup = () => setQuickView(false);
 
-  const img = new Image();
-  img.src = images[0];
-
   return (
     <>
       <div className={style.card}>
