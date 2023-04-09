@@ -7,7 +7,8 @@ describe('ProductCard test', () => {
   beforeEach(() => {
     render(
       <Search
-        setQuery={function (value: React.SetStateAction<string>): void {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        setQuery={function (_value: React.SetStateAction<string>): void {
           throw new Error('Function not implemented.');
         }}
       />
@@ -24,5 +25,15 @@ describe('ProductCard test', () => {
 
   test('Should show search input', () => {
     expect(screen.getByRole('textbox')).toBeDefined();
+  });
+
+  test('FirstName value should equal "test"', () => {
+    const search: HTMLInputElement = screen.getByRole('textbox');
+
+    fireEvent.change(search, {
+      target: { value: 'test' },
+    });
+
+    expect(search.value).toEqual('test');
   });
 });

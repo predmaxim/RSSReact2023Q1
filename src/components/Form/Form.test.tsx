@@ -1,6 +1,6 @@
 import React from 'react';
 import { beforeEach, describe, expect, test } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { Form } from './Form';
 
 const updateFormPageState = (form: JSX.Element): void => {
@@ -22,6 +22,14 @@ describe('Form test', () => {
 
   test('Should show firstName input', () => {
     expect(screen.getByPlaceholderText(/first name/i)).toBeDefined();
+  });
+
+  test('FirstName value should equal "test"', () => {
+    const firstname: HTMLInputElement = screen.getByPlaceholderText(/first name/i);
+    fireEvent.change(firstname, {
+      target: { value: 'test' },
+    });
+    expect(firstname.value).toEqual('test');
   });
 
   test('Should show lastName input', () => {

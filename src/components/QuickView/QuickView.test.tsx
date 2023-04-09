@@ -1,9 +1,8 @@
 import React from 'react';
 import { beforeEach, describe, expect, test } from 'vitest';
-import { fireEvent, getByAltText, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { ProductCard } from '../';
 import { Product } from '../../utils/api';
-import { QuickView } from './QuickView';
 
 const testProps: Product = {
   id: 1,
