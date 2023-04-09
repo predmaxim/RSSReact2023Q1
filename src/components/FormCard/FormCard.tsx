@@ -23,7 +23,7 @@ export function FormCard({
 }: FormCardProps) {
   return (
     <div className={style.card} id={`${id}`}>
-      <p>{avatar}</p>
+      <img src={avatar} alt={firstName} width="200" />
       <h3 className={style.name}>
         {firstName} {lastName}
       </h3>
