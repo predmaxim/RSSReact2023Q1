@@ -28,7 +28,14 @@ export function Sort({ setSortType, setSort }: SortProps) {
       </label>
       <div className={style.sortDirection}>
         <div className={style.radioItem}>
-          <input type="radio" name="sort" id="asc" value="asc" onChange={sortOnChangeHandler} />
+          <input
+            type="radio"
+            name="sort"
+            id="asc"
+            value="asc"
+            onChange={sortOnChangeHandler}
+            defaultChecked
+          />
           <label htmlFor="asc">Asc</label>
         </div>
         <div className={style.radioItem}>
