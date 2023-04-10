@@ -1,0 +1,17 @@
+.show {
+  display: block;
+  position: fixed;
+  right: 30px;
+  top: 30px;
+  background: #33f1b8;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 16px 0px #c7c7c7;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.hide {
+  display: none;
+  transition: 0.3s;
+}
