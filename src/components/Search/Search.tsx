@@ -8,11 +8,15 @@ export interface SearchProps {
 export function Search({ setQuery }: SearchProps) {
   const searchRef = useRef<HTMLInputElement>(null);
   const onKeyUpHandler = (e: React.KeyboardEvent<HTMLInputElement>): void => {
-    e.key === 'Enter' && setQuery(e.currentTarget.value);
+    if (e.key === 'Enter') {
+      localStorage.setItem('searchQuery', e.currentTarget.value);
+      setQuery(e.currentTarget.value);
+    }
   };
 
   const onClickHandler = (): void => {
     (searchRef.current as HTMLInputElement).value = '';
+    localStorage.setItem('searchQuery', '');
     setQuery('');
   };
 
@@ -25,6 +29,7 @@ export function Search({ setQuery }: SearchProps) {
         placeholder="Search"
         className={style.search}
         ref={searchRef}
+        defaultValue={localStorage.getItem('searchQuery') as string}
       />
       <button type="submit" className={style.clear} onClick={onClickHandler}>
         x

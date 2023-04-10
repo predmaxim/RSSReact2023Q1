@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Pagination, ProductList, Search, Sort } from '../../components';
-import style from './home.module.css';
 import { Product, sortProps, sortTypeProps } from '../../utils/api/api.props';
 import { PRODUCT_LIMIT_DEFUALT, searchProducts } from '../../utils/api';
+import style from './home.module.css';
 
 export function Home() {
   const [productsLength, setProductsLength] = useState(0);
@@ -24,10 +24,6 @@ export function Home() {
       setProductsLength(data.length);
     })();
   }, [page, sortType, sort, searchQuery, limit]);
-
-  useEffect(() => {
-    localStorage.setItem('searchQuery', searchQuery);
-  }, [searchQuery]);
 
   return (
     <main className="Home">
