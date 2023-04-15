@@ -1,23 +1,26 @@
 import React, { useRef } from 'react';
 import style from './Search.module.css';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { addQuery, clearQuery } from './searchSlice';
+import { RootState } from 'store';
 
-export interface SearchProps {
-  setQuery: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export function Search({ setQuery }: SearchProps) {
+export function Search() {
+  const dispatch = useDispatch();
+  const savedQuery = useSelector((state: RootState) => state.search.value);
   const searchRef = useRef<HTMLInputElement>(null);
-  const onKeyUpHandler = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+
+  const addQueryToState = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      localStorage.setItem('searchQuery', e.currentTarget.value);
-      setQuery(e.currentTarget.value);
+      dispatch(addQuery(e.currentTarget.value));
     }
   };
 
-  const onClickHandler = (): void => {
-    (searchRef.current as HTMLInputElement).value = '';
-    localStorage.setItem('searchQuery', '');
-    setQuery('');
+  const clearQueryFromState = () => {
+    if ((searchRef.current as HTMLInputElement).value) {
+      (searchRef.current as HTMLInputElement).value = '';
+      dispatch(clearQuery());
+    }
   };
 
   return (
@@ -25,13 +28,13 @@ export function Search({ setQuery }: SearchProps) {
       <input
         type="text"
         name="search"
-        onKeyUp={onKeyUpHandler}
+        onKeyUp={addQueryToState}
         placeholder="Search"
         className={style.search}
         ref={searchRef}
-        defaultValue={localStorage.getItem('searchQuery') as string}
+        defaultValue={savedQuery}
       />
-      <button type="submit" className={style.clear} onClick={onClickHandler}>
+      <button type="submit" className={style.clear} onClick={clearQueryFromState}>
         x
       </button>
     </div>

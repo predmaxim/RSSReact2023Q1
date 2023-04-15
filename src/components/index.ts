@@ -1,6 +1,7 @@
 export { Header } from './Header/Header';
 export { Nav } from './Nav/Nav';
 export { Search } from './Search/Search';
+export { searchReducer } from './Search/searchSlice';
 export { ProductCard } from './ProductCard/ProductCard';
 export { ProductList } from './ProductList/ProductList';
 export { Form } from './Form/Form';
