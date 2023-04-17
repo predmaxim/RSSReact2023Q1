@@ -16,8 +16,8 @@ interface Product {
 }
 
 interface ProductResponse {
-  limit: number;
-  skip: number;
+  limit?: number;
+  skip?: number;
   total: number;
   products: Product[];
 }
