@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import style from './Form.module.css';
-import { FormCard } from '../';
+import { useDispatch } from 'react-redux';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { nanoid } from '@reduxjs/toolkit';
 import { validateFirstLetter } from '../../utils';
 import { FormCardProps } from '../../components/FormCard/FormCard';
+import { setForms } from './FormSlice';
+import style from './Form.module.css';
 
 export interface FormProps {
-  updateFormPageState: (form: JSX.Element) => void;
+  showMessage: () => void;
 }
 
-export function Form({ updateFormPageState }: FormProps) {
-  const [count, setCount] = useState(0);
+export function Form({ showMessage }: FormProps) {
+  const dispatch = useDispatch();
   const [avatarFile, setAvatarFile] = useState('');
 
   const {
@@ -21,18 +23,14 @@ export function Form({ updateFormPageState }: FormProps) {
   } = useForm<FormCardProps>();
 
   const onSubmitHandle: SubmitHandler<FormCardProps> = (data: FormCardProps): void => {
-    setCount(count + 1);
-    updateFormPageState(
-      <FormCard
-        {...{
-          ...data,
-          key: count,
-          id: count,
-          avatar: avatarFile,
-          gender: data.gender,
-        }}
-      />
-    );
+    const form = {
+      ...data,
+      id: nanoid(10),
+      avatar: avatarFile,
+      gender: data.gender,
+    };
+    dispatch(setForms(form));
+    showMessage();
     reset();
   };
 

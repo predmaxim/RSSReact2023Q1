@@ -1,35 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { setCurrentPage } from './paginationSlice';
 import style from './Pagination.module.css';
+import { useSearchProductsQuery } from '../../utils/api';
 
-export interface PaginationProps {
-  currentPage: number;
-  limit: number;
-  productsLength: number;
-  setPage: React.Dispatch<React.SetStateAction<number>>;
-}
+export function Pagination() {
+  const dispatch = useDispatch();
+  // const { total } = useSelector((state: RootState) => state.productList);
+  const search = useSelector((state: RootState) => state.search.value);
+  const { currentPage: page, limit } = useSelector((state: RootState) => state.pagination);
+  const { sort, sortType } = useSelector((state: RootState) => state.sort);
 
-export function Pagination({ currentPage, setPage, limit, productsLength }: PaginationProps) {
-  const [pages, setPages] = useState<number[]>([]);
+  const { data } = useSearchProductsQuery({
+    search,
+    limit,
+    page,
+    sort,
+    sortType,
+  });
 
-  const loadPage = (e: React.MouseEvent<HTMLButtonElement>) => setPage(+e.currentTarget.value);
+  const total = data?.total;
 
-  useEffect(() => {
-    (async () => {
-      const lengthArr = [...Array(Math.ceil(productsLength / limit))].map(
-        (num: number, i: number) => (num = ++i)
-      );
-      setPages(lengthArr);
-    })();
-  }, [limit, productsLength]);
+  const setPage = (e: React.MouseEvent<HTMLButtonElement>) =>
+    dispatch(setCurrentPage(Number(e.currentTarget.value)));
+
+  const lengthArr = [...Array(Math.ceil(total ? total / limit : 0))].map(
+    (num: number, i: number) => (num = ++i)
+  );
 
   return (
     <div className={style.pagination}>
-      {productsLength > 0 &&
-        pages.map((pageNum: number) => (
+      {total &&
+        lengthArr.map((pageNum: number) => (
           <button
             key={pageNum}
-            className={pageNum === currentPage ? style.active : style.paginationBtn}
-            onClick={loadPage}
+            className={pageNum === page ? style.active : style.paginationBtn}
+            onClick={setPage}
             value={pageNum}
           >
             {pageNum}

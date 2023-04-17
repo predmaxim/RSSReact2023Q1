@@ -1,26 +1,27 @@
 import React from 'react';
 import { sortTypeProps, sortProps } from '../../utils/api/api.props';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSortType, setSort } from './sortSlice';
 import style from './Sort.module.css';
+import { RootState } from '../../store';
 
-export interface SortProps {
-  setSortType: React.Dispatch<React.SetStateAction<sortTypeProps>>;
-  setSort: React.Dispatch<React.SetStateAction<sortProps>>;
-}
+export function Sort() {
+  const dispatch = useDispatch();
+  const { sort, sortType } = useSelector((state: RootState) => state.sort);
 
-export function Sort({ setSortType, setSort }: SortProps) {
-  const sortTypeOnChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSortType(e.target.value as sortTypeProps);
+  const sortTypeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setSortType(e.target.value as sortTypeProps));
   };
 
-  const sortOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.target.checked && setSort(e.target.value as sortProps);
+  const sortHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.target.checked && dispatch(setSort(e.target.value as sortProps));
   };
 
   return (
     <div className={style.sortContainer}>
       <label>
         Sort by:
-        <select name="sort-type" onChange={sortTypeOnChangeHandler}>
+        <select name="sort-type" onChange={sortTypeHandler} value={sortType}>
           <option value="rating">Rating</option>
           <option value="price">Price</option>
           <option value="title">Title</option>
@@ -33,13 +34,20 @@ export function Sort({ setSortType, setSort }: SortProps) {
             name="sort"
             id="asc"
             value="asc"
-            onChange={sortOnChangeHandler}
-            defaultChecked
+            onChange={sortHandler}
+            defaultChecked={sort === 'asc'}
           />
           <label htmlFor="asc">Asc</label>
         </div>
         <div className={style.radioItem}>
-          <input type="radio" name="sort" id="desc" value="desc" onChange={sortOnChangeHandler} />
+          <input
+            type="radio"
+            name="sort"
+            id="desc"
+            value="desc"
+            onChange={sortHandler}
+            defaultChecked={sort === 'desc'}
+          />
           <label htmlFor="desc">Desc</label>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import style from './FormCard.module.css';
 
 export interface FormCardProps {
-  id: number;
+  id: string;
   avatar: string;
   firstName: string;
   lastName: string;
@@ -23,7 +23,7 @@ export function FormCard({
 }: FormCardProps) {
   return (
     <div className={style.card} id={`${id}`}>
-      <img src={avatar} alt={firstName} width="200" />
+      <p>{avatar}</p>
       <h3 className={style.name}>
         {firstName} {lastName}
       </h3>
