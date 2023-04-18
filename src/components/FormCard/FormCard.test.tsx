@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import { FormCard, FormCardProps } from './FormCard';
 
 const testProps: FormCardProps = {
-  id: 1,
+  id: '1',
   avatar: 'https://i.dummyjson.com/data/products/1/1.jpg',
   firstName: 'Max',
   lastName: 'Pred',
