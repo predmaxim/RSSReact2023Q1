@@ -1,0 +1,26 @@
+.searchContainer {
+  display: flex;
+  gap: 10px;
+  position: relative;
+}
+
+.search {
+  padding: 0 25px 0 10px;
+}
+
+.clear {
+  padding: 5px 8px;
+  position: absolute;
+  background: none;
+  border: none;
+  outline: none;
+  right: 2px;
+  top: 3px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.clear:hover {
+  background: #eee;
+  border-radius: 50%;
+}
