@@ -7,7 +7,6 @@ import { useSearchProductsQuery } from '../../utils/api';
 
 export function Pagination() {
   const dispatch = useDispatch();
-  // const { total } = useSelector((state: RootState) => state.productList);
   const search = useSelector((state: RootState) => state.search.value);
   const { currentPage: page, limit } = useSelector((state: RootState) => state.pagination);
   const { sort, sortType } = useSelector((state: RootState) => state.sort);

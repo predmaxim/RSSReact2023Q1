@@ -1,4 +1,3 @@
-// import { Header } from '../../components';
 import React from 'react';
 
 export function Page404() {
