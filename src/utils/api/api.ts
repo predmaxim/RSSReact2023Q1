@@ -1,5 +1,5 @@
-import { ProductSortProps, QueryObj, ProductResponse, Product } from './api.props';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { ProductSortProps, QueryObj, ProductResponse, Product } from './api.props';
 
 const PROTOCOL = 'https';
 const BASE = 'dummyjson.com';
@@ -66,7 +66,7 @@ export const searchProductsApi = createApi({
     searchProducts: builder.query<ProductResponse, QueryObj>({
       query: (arg: QueryObj) => {
         const { search } = createNewProps(arg);
-        return `/products/search?q=${search}&limit=0`;
+        return `products/search?q=${search}&limit=0&skip=0`;
       },
       transformResponse: (response: ProductResponse, meta, arg) => {
         const { sort, sortType } = createNewProps(arg);

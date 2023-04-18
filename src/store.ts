@@ -1,21 +1,25 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/query';
+import { PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
 import { searchProductsApi } from './utils/api/api';
 import { searchReducer, sortReducer, paginationReducer, formsReducer } from './components';
 
-export const store = configureStore({
-  reducer: {
-    search: searchReducer,
-    sort: sortReducer,
-    pagination: paginationReducer,
-    forms: formsReducer,
-    [searchProductsApi.reducerPath]: searchProductsApi.reducer,
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(searchProductsApi.middleware),
-  devTools: process.env.NODE_ENV !== 'production',
+const rootReducer = combineReducers({
+  search: searchReducer,
+  sort: sortReducer,
+  pagination: paginationReducer,
+  forms: formsReducer,
+  [searchProductsApi.reducerPath]: searchProductsApi.reducer,
 });
 
-setupListeners(store.dispatch);
+export function setupStore(preloadedState?: PreloadedState<RootState>) {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(searchProductsApi.middleware),
+    devTools: process.env.NODE_ENV !== 'production',
+  });
+}
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = ReturnType<typeof store.dispatch>;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore['dispatch'];

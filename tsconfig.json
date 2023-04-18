@@ -17,7 +17,8 @@
     "jsx": "react",
     "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "types": ["vitest/globals"]
   },
   "include": ["./src/**/*", "styled.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
