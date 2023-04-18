@@ -569,7 +569,7 @@ export default {
       ],
     },
   ],
-  total: 100,
+  total: 30,
   skip: 0,
-  limit: 30,
+  limit: 8,
 };
