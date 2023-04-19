@@ -14,10 +14,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./src",
+    // "baseUrl": "./src",
     "types": ["vitest/globals"]
   },
   "include": ["./src/**/*", "styled.d.ts"],
