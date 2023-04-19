@@ -1,7 +1,7 @@
 import React, { createElement, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Form, FormCard, Message } from '../../components';
-import { RootState } from '../../store';
+import { RootState } from '../../utils/store/store';
 import style from './formPage.module.css';
 import { FormCardProps } from '../../components/FormCard/FormCard';
 

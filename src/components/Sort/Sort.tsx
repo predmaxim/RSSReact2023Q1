@@ -3,7 +3,7 @@ import { sortTypeProps, sortProps } from '../../utils/api/api.props';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSortType, setSort } from './sortSlice';
 import style from './Sort.module.css';
-import { RootState } from '../../store';
+import { RootState } from '../../utils/store/store';
 
 export function Sort() {
   const dispatch = useDispatch();

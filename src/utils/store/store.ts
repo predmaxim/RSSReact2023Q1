@@ -1,6 +1,6 @@
 import { PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
-import { searchProductsApi } from './utils/api/api';
-import { searchReducer, sortReducer, paginationReducer, formsReducer } from './components';
+import { searchProductsApi } from '../api/api';
+import { searchReducer, sortReducer, paginationReducer, formsReducer } from '../../components';
 
 const rootReducer = combineReducers({
   search: searchReducer,

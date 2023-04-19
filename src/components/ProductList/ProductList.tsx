@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { PRODUCT_LIMIT_DEFUALT, Product, useSearchProductsQuery } from '../../utils/api';
 import { ProductCard, ProgressIndicator } from '../../components/';
-import { RootState } from '../../store';
+import { RootState } from '../../utils/store/store';
 import style from './ProductList.module.css';
 
 export function ProductList() {
