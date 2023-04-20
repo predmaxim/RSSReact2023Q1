@@ -1,6 +1,16 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ProductSortProps, QueryObj, ProductResponse, Product } from './api.props';
 import { REHYDRATE } from 'redux-persist';
+import { AnyType } from '../types';
+
+import * as rtkQuery from '@reduxjs/toolkit/dist/query/index.js';
+const { buildCreateApi, coreModule, fetchBaseQuery } = ((rtkQuery as AnyType).default ??
+  rtkQuery) as typeof rtkQuery;
+
+import * as rtkQueryReact from '@reduxjs/toolkit/dist/query/react/index.js';
+const { reactHooksModule } = ((rtkQueryReact as AnyType).default ??
+  rtkQueryReact) as typeof rtkQueryReact;
+
+const createApi = buildCreateApi(coreModule(), reactHooksModule());
 
 const PROTOCOL = 'https';
 const BASE = 'dummyjson.com';

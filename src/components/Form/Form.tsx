@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { nanoid } from '@reduxjs/toolkit';
 import { validateFirstLetter } from '../../utils';
 import { FormCardProps } from '../../components/FormCard/FormCard';
 import { setForms } from './FormSlice';
 import style from './Form.module.css';
+
+import { AnyType } from '../../utils/types';
+
+import * as rtk from '@reduxjs/toolkit';
+const { nanoid } = ((rtk as AnyType).default ?? rtk) as typeof rtk;
 
 export interface FormProps {
   showMessage: () => void;

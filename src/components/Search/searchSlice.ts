@@ -1,4 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { AnyType } from '../../utils/types';
+
+import * as rtk from '@reduxjs/toolkit';
+const { createSlice } = ((rtk as AnyType).default ?? rtk) as typeof rtk;
 
 export type SearchState = { value: string };
 

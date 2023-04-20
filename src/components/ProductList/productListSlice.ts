@@ -1,5 +1,9 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { Product } from '../../utils/api';
+import { AnyType } from '../../utils/types';
+
+import * as rtk from '@reduxjs/toolkit';
+const { createSlice } = ((rtk as AnyType).default ?? rtk) as typeof rtk;
 
 export type ProductListSliceState = {
   products?: Product[];

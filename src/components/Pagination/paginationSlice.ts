@@ -1,5 +1,9 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { PRODUCT_LIMIT_DEFUALT, PRODUCT_PAGE_DEFUALT } from '../../utils/api';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { AnyType } from '../../utils/types';
+
+import * as rtk from '@reduxjs/toolkit';
+const { createSlice } = ((rtk as AnyType).default ?? rtk) as typeof rtk;
 
 export type PaginationSliceState = {
   currentPage: number;
