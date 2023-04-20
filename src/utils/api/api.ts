@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ProductSortProps, QueryObj, ProductResponse, Product } from './api.props';
+import { REHYDRATE } from 'redux-persist';
 
 const PROTOCOL = 'https';
 const BASE = 'dummyjson.com';
@@ -62,6 +63,11 @@ export const searchProductsApi = createApi({
   reducerPath: 'productsQuery',
   tagTypes: ['Products'],
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
+  extractRehydrationInfo(action, { reducerPath }) {
+    if (action.type === REHYDRATE) {
+      return action.payload[reducerPath];
+    }
+  },
   endpoints: (builder) => ({
     searchProducts: builder.query<ProductResponse, QueryObj>({
       query: (arg: QueryObj) => {
