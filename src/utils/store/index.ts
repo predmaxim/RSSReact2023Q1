@@ -1,1 +1,1 @@
-export { setupStore } from './store';
+export { RootState, setupStore } from './store';
