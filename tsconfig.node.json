@@ -12,6 +12,7 @@
     "src/vite-env.d.ts",
     "src/utils/store/index.ts",
     "src/App.tsx",
-    "/src/pages/index.ts"
+    "src/pages/index.ts",
+    "src/utils/store/store.ts"
   ]
 }
