@@ -13,7 +13,7 @@ export default function App() {
         <Route path="/form" element={<FormPage />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
-      <noscript>You need to enable JavaScript to run this app.</noscript>;
+      <noscript>You need to enable JavaScript to run this app.</noscript>
     </>
   );
 }
