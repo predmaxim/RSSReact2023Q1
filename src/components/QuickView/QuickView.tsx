@@ -9,13 +9,13 @@ export interface QuickViewProps {
 
 export function QuickView({
   setQuickView,
-  product: { images, title, description, price, rating, category, stock },
+  product: { id, images, title, description, price, rating, category, stock },
 }: QuickViewProps) {
   const closePopup = () => setQuickView(false);
 
   return (
     <>
-      <div className={style.card}>
+      <div className={style.card} id={`qv-${id}`}>
         <button className={style.close} onClick={closePopup}>
           x
         </button>

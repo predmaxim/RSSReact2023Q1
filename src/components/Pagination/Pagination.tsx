@@ -29,7 +29,7 @@ export function Pagination() {
   );
 
   return (
-    <div className={style.pagination}>
+    <div className={style.pagination} data-cy="pagination-container">
       {total &&
         lengthArr.map((pageNum: number) => (
           <button

@@ -3,7 +3,7 @@ import style from './Search.module.css';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { addQuery, clearQuery } from './searchSlice';
-import { RootState } from 'store';
+import { RootState } from '../../utils/store';
 
 export function Search() {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ export function Search() {
         ref={searchRef}
         defaultValue={savedQuery}
       />
-      <button type="submit" className={style.clear} onClick={clearQueryFromState}>
+      <button className={style.clear} onClick={clearQueryFromState}>
         x
       </button>
     </div>
