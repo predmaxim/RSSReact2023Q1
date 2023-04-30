@@ -4,15 +4,29 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import AutoImport from 'unplugin-auto-import/vite';
+import istanbul from 'vite-plugin-istanbul';
 
 export default defineConfig({
   plugins: [
     react(),
+    istanbul({
+      cypress: true,
+      requireEnv: false,
+      nycrcPath: './.nycrc.json',
+      forceBuildInstrument: true,
+    }),
     AutoImport({
       imports: ['vitest'],
       dts: true,
     }),
   ],
+  server: {
+    host: true,
+    port: 3000,
+    watch: {
+      ignored: ['/coverage/'],
+    },
+  },
   test: {
     globals: true,
     environment: 'jsdom',
