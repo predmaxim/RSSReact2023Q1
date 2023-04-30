@@ -1,19 +1,15 @@
-import { Routes, Route } from 'react-router-dom';
+import { Router } from './utils';
+import { Provider } from 'react-redux';
 import { Header } from './components/Header/Header';
-import { Home, About, FormPage, Page404 } from './pages';
+import { setupStore } from './utils/store';
 import './css/entry.css';
 
 export default function App() {
   return (
-    <>
+    <Provider store={setupStore()}>
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/form" element={<FormPage />} />
-        <Route path="*" element={<Page404 />} />
-      </Routes>
+      <Router />
       <noscript>You need to enable JavaScript to run this app.</noscript>
-    </>
+    </Provider>
   );
 }
