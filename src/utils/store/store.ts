@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   [searchProductsApi.reducerPath]: searchProductsApi.reducer,
 });
 
-function setupStore(preloadedState?: PreloadedState<RootState>) {
+export function setupStore(preloadedState?: PreloadedState<RootState>) {
   return configureStore({
     reducer: rootReducer,
     preloadedState,
