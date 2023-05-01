@@ -12,8 +12,6 @@ export default defineConfig({
     istanbul({
       cypress: true,
       requireEnv: false,
-      nycrcPath: './.nycrc.json',
-      forceBuildInstrument: true,
     }),
     AutoImport({
       imports: ['vitest'],
@@ -22,7 +20,7 @@ export default defineConfig({
   ],
   server: {
     host: true,
-    port: 3000,
+    port: 5173,
     watch: {
       ignored: ['/coverage/'],
     },
@@ -31,5 +29,6 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/vitest.setup.ts'],
+    exclude: ['node_modules'],
   },
 });
