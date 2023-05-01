@@ -134,6 +134,7 @@ export function Form({ showMessage }: FormProps) {
             Gender:*
             <label>
               <input
+                id="male"
                 type="radio"
                 value="male"
                 {...register('gender', {
@@ -144,6 +145,7 @@ export function Form({ showMessage }: FormProps) {
             </label>
             <label>
               <input
+                id="female"
                 type="radio"
                 value="female"
                 {...register('gender', {
