@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   [searchProductsApi.reducerPath]: searchProductsApi.reducer,
 });
 
-export function setupStore(preloadedState?: PreloadedState<RootState>) {
+function setupStore(preloadedState?: PreloadedState<RootState>) {
   return configureStore({
     reducer: rootReducer,
     preloadedState,
@@ -24,6 +24,7 @@ export function setupStore(preloadedState?: PreloadedState<RootState>) {
   });
 }
 
+export const store = setupStore();
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
 export type AppDispatch = AppStore['dispatch'];

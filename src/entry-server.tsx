@@ -2,13 +2,14 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom/server';
-import { setupStore } from './utils/store';
+import { store } from './utils/store';
 import App from './App';
+import { Location } from 'react-router-dom';
 
-export function render(url: string) {
+export function render(url: string | Partial<Location>) {
   const html = ReactDOMServer.renderToString(
     <React.StrictMode>
-      <Provider store={setupStore()}>
+      <Provider store={store}>
         <StaticRouter location={url}>
           <App />
         </StaticRouter>
