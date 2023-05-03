@@ -1,0 +1,98 @@
+.overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: #00000060;
+  width: 100%;
+  z-index: 1;
+}
+
+.card {
+  position: fixed;
+  border-radius: 10px;
+  padding: 20px 50px 20px 20px;
+  transition: 0.3s;
+  background: #fff;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  gap: 20px;
+}
+
+.imgContainer {
+  margin-bottom: 20px;
+  max-height: 300px;
+}
+
+.img {
+  width: max-content;
+  height: 300px;
+}
+
+.title {
+  font-size: 24px;
+  margin: 0;
+}
+
+.description {
+  font-size: 16px;
+  max-width: 500px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.close {
+  position: absolute;
+  z-index: 3;
+  right: 15px;
+  top: 15px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  border-radius: 50%;
+  transition: 0.3s;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: #999;
+}
+
+.close:hover {
+  background: #eee;
+  color: #000;
+}
+
+.addToCartBtn {
+}
+
+.category {
+  font-size: 12px;
+  margin: 0;
+  color: #999;
+}
+
+.col1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.stock,
+.rating {
+  font-size: 14px;
+  color: #333;
+  margin: 5px 0;
+}
