@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import fs from 'node:fs/promises';
 import express from 'express';
+import { ViteDevServer } from 'vite';
+import { server } from 'typescript';
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production';
@@ -16,7 +19,7 @@ const ssrManifest = isProduction
 const app = express();
 
 // Add Vite or respective production middlewares
-let vite;
+let vite: ViteDevServer;
 if (!isProduction) {
   const { createServer } = await import('vite');
   vite = await createServer({
@@ -37,8 +40,9 @@ app.use('*', async (req, res) => {
   try {
     const url = req.originalUrl.replace(base, '');
 
-    let template;
-    let render;
+    let template: string;
+    let render: (arg0: string, arg1: string | undefined) => any;
+
     if (!isProduction) {
       // Always read fresh template in development
       template = await fs.readFile('./index.html', 'utf-8');
@@ -46,7 +50,8 @@ app.use('*', async (req, res) => {
       render = (await vite.ssrLoadModule('/src/entry-server.tsx')).render;
     } else {
       template = templateHtml;
-      render = (await import('./dist/server/entry-server.js')).render;
+      const entryServerProductionPath = './dist/server/entry-server.js';
+      render = (await import(entryServerProductionPath)).render;
     }
 
     const rendered = await render(url, ssrManifest);
@@ -56,7 +61,7 @@ app.use('*', async (req, res) => {
       .replace(`<!--app-html-->`, rendered.html ?? '');
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
-  } catch (e) {
+  } catch (e: any) {
     vite?.ssrFixStacktrace(e);
     console.log(e.stack);
     res.status(500).end(e.stack);
